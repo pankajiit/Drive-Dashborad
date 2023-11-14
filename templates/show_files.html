@@ -1,0 +1,66 @@
+<!-- Add these links to your HTML head section -->
+
+<!-- show_files.html -->
+{% extends 'base.html' %}
+
+{% block title %}Images{% endblock %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show Files</title>
+
+    <!-- Bootstrap CSS link -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Wy2FZZy83MmZAvA5PldmVbc2IM6z9l" crossorigin="anonymous">
+    <style>
+        .image-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .delete-btn {
+            position: absolute;
+            top: 0;
+            right: 0;
+            visibility: hidden;
+        }
+
+        .image-container:hover .delete-btn {
+            visibility: visible;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container mt-5">
+    <h1 class="mb-4">File List</h1>
+
+    <div class="row">
+        {% for file in files %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="image-container">
+                        <img src="{{ file.image_url }}" alt="{{ file.name }}" class="card-img-top" style="max-height: 200px; object-fit: cover;">
+                        <a href="{% url 'delete_file' file.id %}" class="btn btn-danger delete-btn">Delete</a>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ file.name }}</h5>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Bootstrap JS links -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-eMNCOePDcP3XPBOVcjS+5UcBJ++YpxH+f0BpN5RePBkzC5tZYyj4uKKF0jxJp4Ap" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Wy2FZZy83MmZAvA5PldmVbc2IM6z9l" crossorigin="anonymous"></script>
+
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Google Drive APP{% endblock %}</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <style>
+        body {
+            padding-top: 0; /* Adjust based on the height of your navbar */
+        }
+
+        header {
+            background-color: #007bff; /* Bootstrap primary color */
+            color: #ffffff; /* Bootstrap light text color */
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline-block;
+            margin-right: 15px;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        footer {
+            background-color: #007bff; /* Bootstrap dark background color */
+            color: #ffffff; /* Bootstrap light text color */
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>{% block header %}Drive Dashboard{% endblock %}</h1>
+        <nav>
+            <ul>
+                {% if user.is_authenticated %}
+                    <!-- Display links for authenticated users -->
+                    <li><a class="text-light" href="{% url 'upload_file' %}">File Upload</a></li>
+                    <li><a class="text-light" href="{% url 'show_files' %}">All Files</a></li>
+                    <li><a class="text-light" href="{% url 'logout' %}">Logout</a></li>
+                {% else %}
+                    <!-- Display links for non-authenticated users -->
+                    <li><a class="text-light" href="{% url 'login' %}">Login</a></li>
+                    <li><a class="text-light" href="{% url 'signup' %}">Sign Up</a></li>
+                {% endif %}
+
+                
+                <!-- Add other navigation links as needed -->
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    
+    <footer>
+        &copy; 2023 Drive Dashboard. All rights reserved.
+    </footer>
+
+   
+</body>
+</html>
